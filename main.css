@@ -1,0 +1,33 @@
+body {
+  background-image: url('https://images.alphacoders.com/132/1327999.jpeg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+#main{
+  width: 800px;
+  font-family: 'Times New Roman', Times, serif;
+  background-color: 'black';
+  opacity: 100%;
+  margin: auto;
+  border-radius: 20px;
+  border-color: 'blue';
+  text-align: center;
+  padding: 20px;
+  color: 'red'
+}
+
+#header {
+ width: 800px;
+ font-family: 'Times New Roman', Times, serif;
+ background-color: 'black';
+ opacity: 100%;
+ margin: auto;
+ border-radius: 20px;
+ border-color: 'blue';
+ text-align: center;
+ padding: 20px;
+ color: 'red'
+}

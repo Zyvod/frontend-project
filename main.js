@@ -1,16 +1,25 @@
-const body = document.getElementsByTagName('body')
+const body = $('body')
+const searchBar = $('#searchBar')
+const searchBtn = $('#searchBtn')
+let gameData = []
+let userSearch = ''
 
+function searchGames() {
+  $.get(`https://store.steampowered.com/api/storesearch/?term=${userSearch}&=english&cc=NL`, (data) => {
+  for (var i = 0; i < data.items.length; i++) {
+   gameData.push(data.items[i])
+  }
+  console.log(gameData)
+ })
+}
 
-console.log($.get('https://store.steampowered.com/api/storesearch/?term=halo&=english&cc=NL', (data) => {
- console.log(data)
-}))
-
-
-console.log($.get('https://store.steampowered.com/api/getappsingenre/?genre=rpg&cc=us&l=english', (data) => {
- console.log(data)
-}))
-
-
+searchBtn.on('click', (event) => {
+  gameData = []
+  console.log('working')
+  userSearch = searchBar.val()
+  searchGames();
+  console.log(userSearch)
+})
 
 //What data do we get from each search?
 
