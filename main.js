@@ -36,68 +36,121 @@ body.on('keydown', (event) => {
 })
 
 function populateResults(gameData) {
-  const searchResults = document.getElementById('searchResults');
-  const formatter = new Intl.NumberFormat('en-US', {
+   const searchResults = $('#searchResults');
+   // const searchResults = document.getElementById('searchResults');
+   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD'
-  });
+   });
 
-  while (searchResults.firstChild) {
-    searchResults.removeChild(searchResults.firstChild);
-  }
-      gameData.forEach(function(game){
+   searchResults.empty();
+   // while (searchResults.firstChild)
+    // searchResults.removeChild(searchResults.firstChild);
 
-      const gameResult = document.createElement('span');
-      gameResult.classList.add('game-result');
 
-      const gameTitle = document.createElement('h3');
-      gameTitle.classList.add('game-title');
-      gameTitle.textContent = game.name;
-      gameResult.appendChild(gameTitle);
+    gameData.forEach(function(game){
 
-      const gameImage = document.createElement('img');
-      gameImage.classList.add('game-image');
-      gameImage.src = game.tiny_image;
-      gameResult.appendChild(gameImage);
+      const gameResult = $('<span>' , {
+        class: 'game-result'
+      });
+      // const gameResult = document.createElement('span');
+      // gameResult.classList.add('game-result');
 
-      const gameLink = document.createElement('a');
-      gameLink.classList.add('game-link');
-      gameLink.textContent = 'Link';
-      gameLink.setAttribute('href', `https://store.steampowered.com/app/${game.id}`) ;
-      gameResult.appendChild(gameLink);
+      const gameTitle = $('<h3>' , {
+        class: 'game-title',
+        text: `${game.name}`
+      });
+      gameResult.append(gameTitle);
+      // const gameTitle = document.createElement('h3');
+      // gameTitle.classList.add('game-title');
+      // gameTitle.textContent = game.name;
+      // gameResult.appendChild(gameTitle);
 
-      const gameDetails = document.createElement('div');
-      gameDetails.classList.add('game-details');
+      const gameImage = $('<img>' , {
+        class: 'game-image',
+        src: `${game.tiny_image}`
+      });
+      gameResult.append(gameImage);
+      // const gameImage = document.createElement('img');
+      // gameImage.classList.add('game-image');
+      // gameImage.src = game.tiny_image;
+      // gameResult.appendChild(gameImage);
 
-      const metascore = document.createElement('p');
-      if (game.metascore === '') {
-      metascore.innerHTML = `<b>METASCORE:</b> N/A`;
-      } else {
-      metascore.innerHTML = `<b>METASCORE:</b> ${game.metascore}`;
-      }
-      gameDetails.appendChild(metascore);
+      const gameLink = $('<a>' , {
+        class: 'game-link',
+        text: 'Link',
+        href: `https://store.steampowered.com/app/${game.id}`
+      });
+      gameResult.append(gameLink);
+      // const gameLink = document.createElement('a');
+      // gameLink.classList.add('game-link');
+      // gameLink.textContent = 'Link';
+      // gameLink.setAttribute('href', `https://store.steampowered.com/app/${game.id}`) ;
+      // gameResult.appendChild(gameLink);
 
-      const operatingSystems = document.createElement('p');
-      operatingSystems.innerHTML = `<b>OPERATING SYSTEMS:</b>`;
-      let sysString = '';
-      for ( key in game.platforms ) {
-        if ( game.platforms[key] ) {
-          sysString += `  ${key}`;
-        }
-      }
-      operatingSystems.innerHTML += sysString.toUpperCase();
-      gameDetails.appendChild(operatingSystems);
+      const gameDetails = $('<div>' , {
+        class: 'game-details'
+      });
+      // const gameDetails = document.createElement('div');
+      // gameDetails.classList.add('game-details');
 
-      const price = document.createElement('p');
-       if ( 'price' in game ) {
-        price.innerHTML = `<b>PRICE:</b> ${formatter.format(game.price.final/100)}`;
+      const metascore = $('<p>')
+        if ( game.metascore === '' ) {
+          metascore.html('<b>METASCORE:</b> N/A');
         } else {
-        price.innerHTML = `<b>PRICE:</b> No Price Available`;
+          metascore.html(`<b>METASCORE:</b> ${game.metascore}`);
         }
-      gameDetails.appendChild(price);
+        gameDetails.append(metascore);
 
-      gameResult.appendChild(gameDetails);
-      searchResults.appendChild(gameResult);
+      // const metascore = document.createElement('p');
+      // if (game.metascore === '') {
+      // metascore.innerHTML = `<b>METASCORE:</b> N/A`;
+      // } else {
+      // metascore.innerHTML = `<b>METASCORE:</b> ${game.metascore}`;
+      // }
+      // gameDetails.appendChild(metascore);
+
+      const operatingSystems = $('<p>')
+      let sysString = '';
+      $.each( game.platforms, ( key, value ) => {
+        if (value) {
+          sysString += `  ${key}`
+        }
+      });
+      operatingSystems.html(`<b>OPERATING SYSTEMS:</b> ${sysString.toUpperCase()}`);
+      gameDetails.append(operatingSystems);
+
+      // const operatingSystems = document.createElement('p');
+      // operatingSystems.innerHTML = `<b>OPERATING SYSTEMS:</b>`;
+      // let sysString = '';
+      // for ( key in game.platforms ) {
+      //   if ( game.platforms[key] ) {
+      //     sysString += `  ${key}`;
+      //   }
+      // }
+      // operatingSystems.innerHTML += sysString.toUpperCase();
+      // gameDetails.appendChild(operatingSystems);
+
+      const price = $('<p>');
+      if ( 'price' in game ) {
+        price.html(`<b>PRICE:</b> ${formatter.format(game.price.final/100)}`);
+      } else {
+        price.html('<b>PRICE:</b> No Price Available');
+      }
+      gameDetails.append(price);
+
+      // const price = document.createElement('p');
+      //  if ( 'price' in game ) {
+      //   price.innerHTML = `<b>PRICE:</b> ${formatter.format(game.price.final/100)}`;
+      //   } else {
+      //   price.innerHTML = `<b>PRICE:</b> No Price Available`;
+      //   }
+      // gameDetails.appendChild(price);
+
+      gameResult.append(gameDetails);
+      searchResults.append(gameResult);
+      // gameResult.appendChild(gameDetails);
+      // searchResults.appendChild(gameResult);
     })
- }
+}
 
