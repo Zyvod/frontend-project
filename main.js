@@ -6,23 +6,23 @@
 // the key price contains the keys [ currency,final,initial]
 //Discovered that we can append the id from search results to a partial link from steam in order to create a link to the game on our application
 
-const body = $('body')
-const searchBar = $('#searchBar')
-const searchBtn = $('#searchBtn')
+const body = $('body');
+const searchBar = $('#searchBar');
+const searchBtn = $('#searchBtn');
 
 function searchGames(gameData,userSearch) {
   $.get(`https://store.steampowered.com/api/storesearch/?term=${userSearch}&=english&cc=NL`, (data) => {
   for (var i = 0; i < data.items.length; i++) {
-   gameData.push(data.items[i])
+   gameData.push(data.items[i]);
   }
-  console.log(gameData)
-  populateResults(gameData)
+  console.log(gameData);
+  populateResults(gameData);
  })
 }
 searchBtn.on('click', (event) => {
-  let userSearch = ''
-  let gameData = []
-  userSearch = searchBar.val()
+  let userSearch = '';
+  let gameData = [];
+  userSearch = searchBar.val();
   searchGames(gameData,userSearch);
 })
 
@@ -41,10 +41,12 @@ function populateResults(gameData) {
     style: 'currency',
     currency: 'USD'
   });
+
   while (searchResults.firstChild) {
     searchResults.removeChild(searchResults.firstChild);
   }
       gameData.forEach(function(game){
+
       const gameResult = document.createElement('span');
       gameResult.classList.add('game-result');
 
@@ -60,7 +62,7 @@ function populateResults(gameData) {
 
       const gameLink = document.createElement('a');
       gameLink.classList.add('game-link');
-      gameLink.textContent = 'Link'
+      gameLink.textContent = 'Link';
       gameLink.setAttribute('href', `https://store.steampowered.com/app/${game.id}`) ;
       gameResult.appendChild(gameLink);
 
@@ -68,11 +70,22 @@ function populateResults(gameData) {
       gameDetails.classList.add('game-details');
 
       const metascore = document.createElement('p');
+      if (game.metascore === '') {
+      metascore.innerHTML = `<b>METASCORE:</b> N/A`;
+      } else {
       metascore.innerHTML = `<b>METASCORE:</b> ${game.metascore}`;
+      }
       gameDetails.appendChild(metascore);
 
       const operatingSystems = document.createElement('p');
-      operatingSystems.innerHTML = `<b>OPERATING SYSTEMS:</b> ${game.platforms}`;
+      operatingSystems.innerHTML = `<b>OPERATING SYSTEMS:</b>`;
+      let sysString = '';
+      for ( key in game.platforms ) {
+        if ( game.platforms[key] ) {
+          sysString += `  ${key}`;
+        }
+      }
+      operatingSystems.innerHTML += sysString.toUpperCase();
       gameDetails.appendChild(operatingSystems);
 
       const price = document.createElement('p');
