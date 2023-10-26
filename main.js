@@ -26,6 +26,15 @@ searchBtn.on('click', (event) => {
   searchGames(gameData,userSearch);
 })
 
+body.on('keydown', (event) => {
+  if ( event.originalEvent.key === 'Enter') {
+    let userSearch = '';
+    let gameData = [];
+    userSearch = searchBar.val();
+    searchGames(gameData,userSearch);
+  }
+})
+
 function populateResults(gameData) {
   const searchResults = document.getElementById('searchResults');
   const formatter = new Intl.NumberFormat('en-US', {
