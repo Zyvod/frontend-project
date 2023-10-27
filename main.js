@@ -1,11 +1,3 @@
-//What data do we get from each search?
-
-// each item contains the following keys [ id,metascore,name,platforms,price,stereamingvideo,tiny_image,type]
-
-// the key platforms contains the keys [linux,mac,windows]
-// the key price contains the keys [ currency,final,initial]
-//Discovered that we can append the id from search results to a partial link from steam in order to create a link to the game on our application
-
 const body = $('body');
 const searchBar = $('#searchBar');
 const searchBtn = $('#searchBtn');
@@ -51,28 +43,33 @@ function populateResults(gameData) {
         class: 'game-result'
       });
 
+      const gameDetails = $('<div>' , {
+        class: 'game-details'
+      });
+
       const gameTitle = $('<h3>' , {
         class: 'game-title',
         text: `${game.name}`
       });
-      gameResult.append(gameTitle);
+      gameDetails.append(gameTitle);
 
       const gameImage = $('<img>' , {
         class: 'game-image',
         src: `${game.tiny_image}`
       });
-      gameResult.append(gameImage);
+      gameDetails.append(gameImage);
 
-      const gameDetails = $('<div>' , {
-        class: 'game-details'
-      });
+      const gameLinkContainer = $('<p>' , {
+        class: 'link-container'
+      })
 
       const gameLink = $('<a>' , {
         class: 'game-link',
-        text: `Visit Steam Store`,
+        text: ` Purchase On Steam`,
         href: `https://store.steampowered.com/app/${game.id}`
       });
-      gameDetails.append(gameLink);
+      gameLinkContainer.append(gameLink)
+      gameDetails.append(gameLinkContainer);
 
       const metascore = $('<p>')
         if ( game.metascore === '' ) {
