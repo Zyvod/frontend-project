@@ -1,6 +1,10 @@
 const body = $('body');
 const searchBar = $('#searchBar');
 const searchBtn = $('#searchBtn');
+const currentLogBtn = $('#currentLog')
+const saveBtn = $('#saveBtn')
+const loadBtn = $('#loadBtn')
+const searchResults = $('#searchResults')
 const backLogData = {}
 let backLogKey = 0
 function searchGames(gameData,userSearch) {
@@ -12,11 +16,19 @@ function searchGames(gameData,userSearch) {
   populateResults(gameData);
  })
 }
+
 searchBtn.on('click', (event) => {
   let userSearch = '';
   let gameData = [];
   userSearch = searchBar.val();
   searchGames(gameData,userSearch);
+})
+
+currentLogBtn.on('click', (event) => {
+  searchResults.empty();
+  for (let key in backLogData) {
+    searchResults.append(backLogData[key])
+  }
 })
 
 body.on('keydown', (event) => {
@@ -29,8 +41,6 @@ body.on('keydown', (event) => {
 })
 
 function populateResults(gameData) {
-   const searchResults = $('#searchResults')
-
    const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD'
@@ -103,7 +113,7 @@ function populateResults(gameData) {
       })
       addToBackLog.html('Add To Back-Log')
       addToBackLog.on('click', (event) => {
-        backLogData[`${backLogKey}`] = $(event.target).parent();
+        backLogData[`${backLogKey}`] = $(event.target).parent()[0];
         backLogKey ++
       })
       gameDetails.append(addToBackLog);
@@ -114,3 +124,6 @@ function populateResults(gameData) {
     })
 }
 
+function goToBackLog(backLogData) {
+
+}
