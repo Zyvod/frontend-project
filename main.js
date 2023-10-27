@@ -1,7 +1,8 @@
 const body = $('body');
 const searchBar = $('#searchBar');
 const searchBtn = $('#searchBtn');
-
+const backLogData = {}
+let backLogKey = 0
 function searchGames(gameData,userSearch) {
   $.get(`https://store.steampowered.com/api/storesearch/?term=${userSearch}&=english&cc=NL`, (data) => {
   for (var i = 0; i < data.items.length; i++) {
@@ -96,6 +97,16 @@ function populateResults(gameData) {
         price.html('<b>PRICE:</b> No Price Available');
       }
       gameDetails.append(price);
+
+      const addToBackLog = $('<button>' , {
+        class: 'backLog-btn'
+      })
+      addToBackLog.html('Add To Back-Log')
+      addToBackLog.on('click', (event) => {
+        backLogData[`${backLogKey}`] = $(event.target).parent();
+        backLogKey ++
+      })
+      gameDetails.append(addToBackLog);
 
       gameResult.append(gameDetails);
       searchResults.append(gameResult);
