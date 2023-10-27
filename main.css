@@ -7,13 +7,13 @@ body {
 }
 
 #main {
-  width: 80vw;
+  width: 80%;
   flex-wrap: wrap;
   flex: auto;
   margin: auto;
   padding: 50px;
   border-radius: 20px;
-  background-color: rgb(27, 40, 56, 0.8);
+  background-color: rgb(27, 40, 56, 95%);
   opacity: 1;
   font-family: "Motiva Sans", "Twemoji", "Noto Sans", Helvetica, sans-serif;
   text-align: center;
@@ -39,9 +39,10 @@ body {
   width: 250px;
   height: 25px;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 30px;
   padding: 0;
-  border-radius: 0%;
+  border: 5px;
+  border-radius: 0;
   border-color: aliceblue;
   border-style: inset;
   background-color: #305d8a;
@@ -54,14 +55,19 @@ body {
   color: rgb(255, 255, 255);
 }
 
+#searchBar::placeholder {
+  color:  rgb(220 222 223);
+}
+
 #searchBtn {
   width: 100px;
-  height: 29px;
+  height: 35px;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 30px;
   margin-left: -1%;
   padding-left: 0%;
-  border-radius: 0%;
+  border: 5px;
+  border-radius: 0;
   border-style: inset;
   border-left: hidden;
   border-color: aliceblue;
@@ -71,6 +77,79 @@ body {
   font: bold;
   font-size: large;
   color: rgb(220 222 223);
+}
+
+#loadBtn {
+  height: 29px;
+  margin: auto;
+  margin-top: 30px;
+  margin-left: 20px;
+  border-radius: 20px;
+  border-style: ridge;
+  border-color: rgb(240, 248, 255, 50%);
+  background-color: #305d8a;
+  opacity: 1;
+  font-family: "Motiva Sans", "Twemoji", "Noto Sans", Helvetica, sans-serif;
+  font: bold;
+  font-size: large;
+  color: rgb(220 222 223);
+}
+
+#saveBtn {
+  height: 29px;
+  margin: auto;
+  margin-top: 30px;
+  margin-right: 20px;
+  border-radius: 20px;
+  border-style: ridge;
+  border-color: rgb(240, 248, 255, 50%);
+  background-color: #305d8a;
+  opacity: 1;
+  font-family: "Motiva Sans", "Twemoji", "Noto Sans", Helvetica, sans-serif;
+  font: bold;
+  font-size: large;
+  color: rgb(220 222 223);
+}
+
+#currentBtn {
+  height: 29px;
+  margin-top: 30px;
+  border-radius: 20px;
+  border-style: ridge;
+  border-color: rgb(240, 248, 255, 50%);
+  background-color: rgb(42 71 94);
+  opacity: 1;
+  font-family: "Motiva Sans", "Twemoji", "Noto Sans", Helvetica, sans-serif;
+  font: bold;
+  font-size: large;
+  color: rgb(220 222 223);
+}
+
+.backlog-btn {
+  height: 30px;
+  border-radius: 20px;
+  border-style: ridge;
+  border-color: rgb(240, 248, 255, 50%);
+  background-color: rgb(42 71 94);
+  opacity: 1;
+  font-family: "Motiva Sans", "Twemoji", "Noto Sans", Helvetica, sans-serif;
+  font: bold;
+  font-size: large;
+  color: rgb(220 222 223);
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.9);
+  transition: transform 0.1s ease-in-out;
+}
+
+a:active {
+  transform: scale(0.9);
+  transition: transform 0.1s ease-in-out;
 }
 
 h1 {
@@ -112,16 +191,11 @@ h3 {
   margin-top: 40px;
   padding: 0%;
 }
-/* store background rgb(42 71 94) rgb(27 40 56) */
-/* store lighter gray rgb(78 105 125) */
-
 
 .link-container {
   width: 300px;
   margin: auto;
   margin-top: 20px;
-  /* padding-right: 2%;
-  padding-left: 2%; */
   border-radius: 0%;
   border: 5px double rgb(78 105 125);
   background-color: rgb(42 71 94);
@@ -137,9 +211,10 @@ h3 {
   padding-left: 2%;
   border: 10px outset rgb(78 105 125);
   border-radius: 0%;
-  background-color: rgb(27 40 56);
+  background-color: rgb(48, 93, 138, 70%);
   font-family: "Motiva Sans", "Twemoji", "Noto Sans", Helvetica, sans-serif;
   font-size: large;
+  color: rgb(220 222 223);
 }
 
 .game-image {
@@ -150,7 +225,3 @@ h3 {
   border: 10px double rgb(42 71 94);
   border-radius: 0%;
 }
-
-/* 231 x 81  2.655 x 1 */
-
-

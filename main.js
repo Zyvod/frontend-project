@@ -1,7 +1,7 @@
 const body = $('body');
 const searchBar = $('#searchBar');
 const searchBtn = $('#searchBtn');
-const currentLogBtn = $('#currentLog')
+const currentLogBtn = $('#currentBtn')
 const saveBtn = $('#saveBtn')
 const loadBtn = $('#loadBtn')
 const searchResults = $('#searchResults')
@@ -15,7 +15,6 @@ function searchGames(gameData,userSearch) {
   for (var i = 0; i < data.items.length; i++) {
    gameData.push(data.items[i]);
   }
-  console.log(gameData);
   populateResults(gameData);
  })
 }
@@ -57,7 +56,8 @@ function populateResults(gameData) {
      const gameLink = $('<a>' , {
        class: 'game-link',
        text: ` Purchase On Steam`,
-       href: `https://store.steampowered.com/app/${game.id}`
+       href: `https://store.steampowered.com/app/${game.id}`,
+       target: '_blank'
      });
      gameLinkContainer.append(gameLink)
      gameDetails.append(gameLinkContainer);
@@ -89,7 +89,7 @@ function populateResults(gameData) {
      gameDetails.append(price);
 
      const addToBackLog = $('<button>' , {
-       class: 'backLog-btn'
+       class: 'backlog-btn',
      })
      addToBackLog.html('Add To Back-Log')
      addToBackLog.on('click', (event) => {
@@ -103,6 +103,7 @@ function populateResults(gameData) {
 
    })
 }
+
 searchBtn.on('click', (event) => {
   let userSearch = '';
   let gameData = [];
@@ -120,14 +121,11 @@ currentLogBtn.on('click', (event) => {
 saveBtn.on('click', (event) => {
   let saveName = prompt('What Would You Like to Name Your Log?')
   let i = 0
-  for ( let key in backLogData ){
-    console.log(backLogData[key].outerHTML)
+   for ( let key in backLogData ){
      savedLogs[i] = backLogData[key].outerHTML
      i++
-   }
-    //  console.log(savedLogs)
+    }
      localStorage.setItem(`${saveName}`, JSON.stringify(savedLogs))
-    //  console.log(localStorage);
 })
 
 loadBtn.on('click', (event) => {
@@ -152,7 +150,6 @@ loadBtn.on('click', (event) => {
     backLogKey++
 
     searchResults.append(gameResult);
-    console.log(backLogData)
   })
 })
 
@@ -164,5 +161,3 @@ body.on('keydown', (event) => {
     searchGames(gameData,userSearch);
   }
 })
-
-
